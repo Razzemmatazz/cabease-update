@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cab-Ease</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Chewy" rel="stylesheet">
+    <link rel="stylesheet" href="css/main-styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <header class="fixed-top">
+      <h2 class="title">Cab-Ease</h2>
+    </header>
+    <main class='container-fluid d-none'>
+      <div class='row position-fixed'>
+        <div class='col-12 pt-2'>
+          <div id='menuButtons' class="btn-group btn-group-lg btn-group-toggle" value='false' data-toggle="buttons" role='group' onclick="(openTab(this))"></div>
+        </div>
+      </div>
+      <div id='notification' class="d-none row py-5">
+        <div class='col-12'>
+          <div class='justify-content-between mt-2'>
+            <button type='button' class='btn-lg btn-secondary float-right' onclick='closeNotification()'>X</button>
+            <p class='notificationText'></p>
+          </div>
+        </div>
+      </div>
+      <div class='row py-5'>
+        <div class='col-md-5 col-sm-7 col-7 mx-auto'>
+          <div id='currentForm'></div>
+        </div>
+        <div class='d-none col-md-11 col-sm-12 col-12 mx-auto py-5'>
+          <div id='editTable'>
+            <div class="loader"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class='d-none position-absolute gapi-verification'>
+      <h2>This app requires authorization to Google services before use. Please click the button below to authorize Google services.</h2>
+      <button type='button' class='btn btn-secondary' onclick='handleAuthClick()'>Authorize Google</button>
+    </div>
+    <script src='./js/forms.js'></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src='./js/gapi.js'></script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+    <script src='./js/scripts.js'></script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cab-Ease</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Chewy" rel="stylesheet">
+    <link rel="stylesheet" href="css/login-styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <header class="header fixed-top">
+      <h2 class="title">Cab-Ease</h2>
+    </header>
+    <main class='container-fluid'>
+      <div class='row'>
+        <div class='col-md-4 mx-auto py-2'>
+          <form id='verify' class='needs-validation' novalidate>
+            <div class='form-group'>
+              <label for='email'>Email Address</label>
+              <input class='form-control' type='email' id="email" autocomplete='on' placeholder='Cab-Ease Email Address' onfocusout='verifyEmail(this)' required>
+              <div class='invalid-feedback'>
+                Please provide a valid email address
+              </div>
+            </div>
+            <div class='form-group'>
+              <span id='emailValidation'></span>
+              <label id='passwordLabel' for='password'>Password</label>
+              <input class='form-control' type='password' id='password' autocomplete='on' required>
+              <div class='invalid-feedback'>
+                Please provide a password
+              </div>
+            </div>
+            <div class='form-row'>
+              <span class='text-danger' id='warning'></span>
+            </div>
+            <div class='form-row buttons'>
+              <button type='submit' class='btn btn-secondary' id='logPageSubmit'>Verify Driver</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <div class='d-none position-absolute gapi-verification'>
+      <h2>This app requires authorization to Google services before use. Please click the button below to authorize Google services.</h2>
+      <button type='button' class='btn btn-secondary' onclick='handleAuthClick()'>Authorize Google</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src='./js/gapi.js'></script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+    <script src='./js/login-scripts.js'></script>
+  </body>
+</html>
