@@ -1,8 +1,9 @@
 // Client ID and API key from the Developer Console
-var CLIENT_ID = '707401385102-ebgj0ebkt1p1jelih8g04lenooc9l4kb.apps.googleusercontent.com';
-var API_KEY = 'AIzaSyBkOjuOvB7rSi3egT5tGQqa_BVSXZ8wE1s';
-var DISCOVERY_DOCS = ['https://script.googleapis.com/$discovery/rest?version=v1'];
-var SCOPES = 'https://www.googleapis.com/auth/spreadsheets';
+var CLIENT_ID = '180966977438-fqqes4kqp6dpr502v0btgnvt00f62u97.apps.googleusercontent.com';
+var API_KEY = 'AIzaSyBfNFyUUHzR9M1Q-L29Z3BGLG2s8uly8hY';
+var DISCOVERY_DOCS = ['https://sheets.googleapis.com/$discovery/rest?version=v4'];
+var SCOPES =
+	'https://www.googleapis.com/auth/script.external_request https://www.googleapis.com/auth/script.send_mail https://www.googleapis.com/auth/spreadsheets';
 
 // var authorizeButton = document.getElementById('authorize-button');
 // var signoutButton = document.getElementById('signout-button');
@@ -22,8 +23,9 @@ function initClient() {
 			if (!gapi.auth2.getAuthInstance().isSignedIn.get()) {
 				$('.gapi-verification').removeClass('d-none');
 			}
-			gapi.client.load('https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest');
-			// Listen for sign-in state changes.+
+			gapi.client.load('https://script.googleapis.com/$discovery/rest?version=v1');
+
+			// Listen for sign-in state changes.
 		});
 }
 

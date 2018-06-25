@@ -1,11 +1,11 @@
 var scriptId = '1C_BiKPvlMv0IhMxmedlE4GWHz_lLFGWX6MLafwx9KlOwbK87h4koXYQp';
 $(document).ready(function() {
-	console.log(sessionStorage);
+	console.log([sessionStorage.getItem('id'), sessionStorage.getItem('email')]);
 	var email = sessionStorage.getItem('email');
 	if (email) {
 		$('main').removeClass('d-none');
 	} else {
-		var loginUrl = 'http://localhost:1021/index.html';
+		var loginUrl = './index.html';
 		var note = $(document.createElement('h1'))
 			.html(
 				'You are not an authorized user for Cab-Ease. Please return to the <a href="' +
@@ -88,7 +88,7 @@ function openTab(element) {
 		var name = $(element)
 			.children('.active')
 			.text();
-		console.log('opentab ' + name);
+		console.log('Open Tab ' + name);
 		if (name == '☰') {
 			toggleMenu($('#menuButtons').val());
 		} else if (name == 'Edit Fare') {
@@ -99,8 +99,7 @@ function openTab(element) {
 					scriptId: scriptId,
 					resource: {
 						function: 'getPastFares',
-						parameters: [sessionStorage.getItem('id')],
-						devMode: true
+						parameters: [sessionStorage.getItem('id')]
 					}
 				})
 				.then(function(response) {
@@ -132,7 +131,6 @@ function addForm(formName) {
 		.addClass('needs-validation')
 		.attr({ id: formName, novalidate: 'novalidate', action: 'javascript:' + formData.submit.onclick });
 	$(form).submit(function(event) {
-		console.log($(form)[0].checkValidity());
 		if (!$(form)[0].checkValidity()) {
 			event.preventDefault();
 			event.stopPropagation();
@@ -253,6 +251,7 @@ function submit(formName) {
 	var inputs = $(form)
 		.children('.form-group')
 		.children('input');
+	console.log(inputs);
 	var selectedButtons = $(form)
 		.children('.form-group')
 		.children('.btn-group-toggle')
@@ -289,8 +288,6 @@ function submit(formName) {
 						break;
 					case 'fareDiscrepancy':
 						if (button == 'Yes' && obj.description == '') {
-							console.log('discrepancy');
-							console.log($(form));
 							obj.description = $(form)
 								.children('.form-group')
 								.children('textarea')
@@ -312,30 +309,33 @@ function submit(formName) {
 			}
 			break;
 		case 'logOnForm':
-			console.log(inputs);
 			obj.menuType = 'Log On/ Log Off';
 			obj.log = $('#logon')
 				.parent()
 				.text();
-			obj.description = 'Fleet Vehicle ' + $(inputs[0]).val();
-			obj.mileage = $(inputs[1]).val();
+			obj.description = 'Fleet Vehicle ' + $('#vehicleNum').val();
+			obj.mileage = $('#odometer').val();
 			if (obj.log == 'Log On') {
 				gapi.client.script.scripts
 					.run({
 						scriptId: scriptId,
 						resource: {
 							function: 'checkMileage',
-							parameters: [$(inputs[0]).val(), obj.mileage],
-							devMode: true
+							parameters: [
+								$('#vehicleNum').val(),
+								obj.mileage,
+								sessionStorage.getItem('id'),
+								sessionStorage.getItem('email')
+							]
 						}
 					})
 					.then(function(response) {
 						if (response.result.response.result !== '') {
-							console.log(response.result.response.result);
 							updateNotification(response.result.response.result);
 
 							$('#notification').removeClass('d-none');
-						} else {
+						}
+						if (response.status !== 200) {
 							console.log('check mileage failed');
 						}
 					});
@@ -356,28 +356,26 @@ function submit(formName) {
 		obj.log,
 		obj.mileage
 	];
-	console.log(obj);
 	gapi.client.script.scripts
 		.run({
 			scriptId: scriptId,
 			resource: {
 				function: 'sheetUpdate',
-				parameters: [sessionStorage.getItem('id'), output],
-				devMode: true
+				parameters: [sessionStorage.getItem('id'), output]
 			}
 		})
 		.then(function(response) {
 			if (response.status === 200) {
-				console.log('submit success');
+				console.log('Submit to sheet succeeded');
 				submitted(formName, obj.log);
 			} else {
-				console.log('submit failed');
+				console.log('Submit to sheet failed');
 			}
 		});
 }
 
 function submitted(formName, logStatus) {
-	console.log('submitted ' + formName);
+	console.log('Submitted ' + formName);
 	if (formName == 'addFareForm') {
 		var parentDiv = $(document.createElement('div')).css({
 			display: 'flex',
@@ -446,7 +444,6 @@ function buttonCheck(element) {
 	var id = element.id;
 	setTimeout(function() {
 		var active = $(element).children('.active');
-		console.log(active.text());
 		switch (id) {
 			case 'fareType':
 				if (active.text() == 'Credit Card') {
@@ -741,8 +738,7 @@ function editSave(button, tableRow) {
 				scriptId: scriptId,
 				resource: {
 					function: 'sheetUpdate',
-					parameters: [sessionStorage.getItem('id'), output, row.childNodes[1].innerHTML],
-					devMode: true
+					parameters: [sessionStorage.getItem('id'), output, row.childNodes[1].innerHTML]
 				}
 			})
 			.then(function(response) {
@@ -752,7 +748,6 @@ function editSave(button, tableRow) {
 }
 
 function toggleMenu(state) {
-	console.log('toggleMenu');
 	if (state === 'true') {
 		$('#menuButtons')
 			.children()

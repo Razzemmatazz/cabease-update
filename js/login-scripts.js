@@ -3,7 +3,7 @@ var scriptId = '1C_BiKPvlMv0IhMxmedlE4GWHz_lLFGWX6MLafwx9KlOwbK87h4koXYQp';
 $(document).ready(function() {
 	var email = sessionStorage.getItem('email');
 	if (email) {
-		parent.window.location.href = 'http://localhost:1021/main.html';
+		parent.window.location.href = './main.html';
 	}
 	// Fetch all the forms we want to apply custom Bootstrap validation styles to
 	var forms = document.getElementsByClassName('needs-validation');
@@ -12,7 +12,6 @@ $(document).ready(function() {
 		form.addEventListener(
 			'submit',
 			function(event) {
-				console.log(form);
 				if (!form.checkValidity()) {
 					event.preventDefault();
 					event.stopPropagation();
@@ -40,8 +39,7 @@ function validateLogin() {
 			scriptId: scriptId,
 			resource: {
 				function: 'validateLogin',
-				parameters: [email, password],
-				devMode: true
+				parameters: [email, password]
 			}
 		})
 		.then(function(response) {
@@ -50,7 +48,7 @@ function validateLogin() {
 				sessionStorage.setItem('clocked', 'false');
 				sessionStorage.setItem('email', responseObj.user.email);
 				sessionStorage.setItem('id', responseObj.user.id);
-				parent.window.location.href = 'http://localhost:1021/main.html';
+				parent.window.location.href = './main.html';
 			} else {
 				$('#warning').html('Invalid Email or Password');
 			}
@@ -58,7 +56,6 @@ function validateLogin() {
 }
 
 function verifyEmail(element) {
-	console.log('verify email');
 	var email = $(element).val();
 	gapi.client.script.scripts
 		.run({
@@ -70,9 +67,7 @@ function verifyEmail(element) {
 			}
 		})
 		.then(function(resp) {
-			console.log(resp.result.response.result);
 			var status = resp.result.response.result.userStatus;
-			console.log(status);
 			var warning = $('#warning');
 			switch (status) {
 				case 'invalid':
@@ -114,8 +109,7 @@ function addNewUser() {
 			scriptId: scriptId,
 			resource: {
 				function: 'addNewUser',
-				parameters: [email, password],
-				devMode: true
+				parameters: [email, password]
 			}
 		})
 		.then(function(response) {
