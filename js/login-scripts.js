@@ -62,8 +62,7 @@ function verifyEmail(element) {
 			scriptId: scriptId,
 			resource: {
 				function: 'verifyEmail',
-				parameters: [email],
-				devMode: true
+				parameters: [email]
 			}
 		})
 		.then(function(resp) {
