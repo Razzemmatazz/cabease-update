@@ -19,8 +19,31 @@
 	.gapi-verification h2 {
 		font-size: 1.5em;
 	}
+	.form-group > * {
+		width: 100%;
+	}
+	.form-group label {
+		font-size: 7vw;
+	}
+	.form-group input {
+		font-size: 5vw;
+	}
+	.btn-group,
+	.btn-group-vertical {
+		width: 100%;
+	}
+	.btn-group label {
+		width: 50%;
+	}
+	.btn-group label,
+	.btn-group-vertical label {
+		font-size: 2.8vw;
+	}
+	#currentForm {
+		margin-top: 10%;
+	}
 }
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 321px) and (max-width: 768px) {
 	.form-group > * {
 		width: 100%;
 	}
@@ -44,6 +67,9 @@
 	.btn-group label,
 	.btn-group-vertical label {
 		font-size: 2.8vw;
+	}
+	#currentForm {
+		margin-top: 10%;
 	}
 }
 @media screen and (min-width: 769px) {
