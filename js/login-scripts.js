@@ -116,7 +116,7 @@ function addNewUser() {
 			if (responseObj.status) {
 				sessionStorage.setItem('clocked', 'false');
 				sessionStorage.setItem('email', email);
-				parent.window.location.href = 'http://localhost:1021/main.html';
+				parent.window.location.href = './main.html';
 			} else {
 				$('#warning').html(responseObj.message);
 			}

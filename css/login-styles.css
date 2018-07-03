@@ -1,3 +1,9 @@
+@media screen and (max-width: 320px) {
+	.gapi-verification h2 {
+		font-size: 1.5em;
+	}
+}
+
 @font-face {
 	font-family: 'Chewy', cursive;
 }

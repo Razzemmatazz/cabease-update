@@ -134,10 +134,11 @@ function addForm(formName) {
 		if (!$(form)[0].checkValidity()) {
 			event.preventDefault();
 			event.stopPropagation();
+			console.log('invalid');
 		} else {
 			$(form)
-				.children('.submitButton')
-				.click();
+				.children('.submit-button')
+				.prop('disabled', true);
 			$(form).addClass('was-validated');
 			return;
 		}
@@ -157,6 +158,9 @@ function addForm(formName) {
 					id: question.name,
 					onclick: question.click ? question.click : null
 				};
+				if (question.step) {
+					elementType.step = question.step;
+				}
 				break;
 			case 'button':
 				elementType = {
@@ -217,7 +221,7 @@ function addForm(formName) {
 	});
 	var submit = $(document.createElement('button'))
 		.html(formData.submit.html)
-		.addClass('btn-lg btn-info');
+		.addClass('btn-lg btn-info submit-button');
 	Object.keys(formData.submit).forEach(function(key) {
 		if (key !== 'html' && key !== 'onclick') {
 			var obj = {};
@@ -265,7 +269,7 @@ function submit(formName) {
 
 			obj.fareType = $(selectedButtons[0]).text();
 			if (obj.fareType == 'Credit Card') {
-				obj.tip = $(inputs[2]).val();
+				obj.tip = $(inputs[2]).val() ? $(inputs[2]).val() : '';
 			}
 			$(selectedButtons).each(function(index) {
 				var button = $(this).text();
@@ -435,7 +439,7 @@ function submitted(formName, logStatus) {
 			sessionStorage.setItem('email', '');
 			sessionStorage.setItem('id', '');
 			sessionStorage.setItem('clocked', 'false');
-			parent.window.location.href = 'http://localhost:1021/index.html';
+			parent.window.location.href = './index.html';
 		}
 	}
 }
@@ -451,13 +455,11 @@ function buttonCheck(element) {
 						.addClass('form-group')
 						.attr({ id: 'ccForm' });
 					var label = $(document.createElement('label')).html('Credit Card Tip');
-					var input = $(document.createElement('input'))
-						.attr({
-							name: 'ccTip',
-							id: 'ccTip',
-							placeholder: '$'
-						})
-						.prop('required', true);
+					var input = $(document.createElement('input')).attr({
+						name: 'ccTip',
+						id: 'ccTip',
+						placeholder: '$'
+					});
 					inputForm.append(label, input);
 					var stateButtons = $(document.createElement('div'))
 						.addClass('form-group')

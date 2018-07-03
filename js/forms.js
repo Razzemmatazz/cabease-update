@@ -14,6 +14,7 @@ var forms = {
 				label: 'Fare Amount',
 				type: 'input',
 				subtype: 'number',
+				step: '0.01',
 				placeholder: '$',
 				options: [],
 				click: ''
@@ -47,7 +48,7 @@ var forms = {
 			id: 'addFareSubmit',
 			html: 'Submit',
 			type: 'submit',
-			onclick: 'submit("addFareForm")'
+			onclick: "submit('addFareForm')"
 		}
 	},
 	'Add Expense/Gas': {
@@ -57,6 +58,7 @@ var forms = {
 				label: 'Amount of Expense/Gas',
 				type: 'input',
 				subtype: 'number',
+				step: '0.01',
 				placeholder: '$',
 				options: [],
 				click: ''
@@ -74,7 +76,7 @@ var forms = {
 			id: 'addExpenseSubmit',
 			html: 'Submit',
 			type: 'submit',
-			onclick: 'submit("addExpenseForm")'
+			onclick: "submit('addExpenseForm')"
 		}
 	},
 	logOn: {
@@ -100,7 +102,7 @@ var forms = {
 			id: 'logOnOff',
 			html: 'Log On',
 			type: 'submit',
-			onclick: 'submit("logOnForm")'
+			onclick: "submit('logOnForm')"
 		}
 	},
 	logOff: {
@@ -126,7 +128,7 @@ var forms = {
 			name: 'logOnOff',
 			html: 'Log Off',
 			type: 'submit',
-			onclick: 'submit("logOnForm")'
+			onclick: "submit('logOnForm')"
 		}
 	}
 };
