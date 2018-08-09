@@ -156,7 +156,7 @@ function addForm(formName) {
 					type: question.subtype,
 					placeholder: question.placeholder ? question.placeholder : null,
 					id: question.name,
-					focusout: question.focusout ? question.focusout : null
+					onfocusout: question.focusout ? question.focusout : null
 				};
 				if (question.step) {
 					elementType.step = question.step;
@@ -532,14 +532,14 @@ function buttonCheck(element) {
 					$(element)
 						.parent()
 						.after(inputForm, stateButtons, paidButtons);
-				} else {
+				} else if (active.text() !== 'Credit Card') {
 					$('#ccForm').remove();
 					$('#ccState').remove();
 					$('#ccPaid').remove();
 				}
 				break;
 			case 'fareDiscrepancy':
-				if (active.text() == 'Yes') {
+				if (active.text() == 'Yes' && $('#discrepancyDescription').length === 0) {
 					var inputForm = $(document.createElement('div'))
 						.addClass('form-group')
 						.attr({ id: 'discrepancyDescription' });
@@ -549,12 +549,12 @@ function buttonCheck(element) {
 					$(element)
 						.parent()
 						.after(inputForm);
-				} else {
+				} else if (active.text() !== 'Yes') {
 					$('#discrepancyDescription').remove();
 				}
 				break;
 			case 'expenseType':
-				if (active.text() == 'Expense') {
+				if (active.text() == 'Expense' && $('#expenseDescription').length === 0) {
 					var inputForm = $(document.createElement('div'))
 						.addClass('form-group')
 						.attr({ id: 'expenseDescription' });
@@ -564,7 +564,7 @@ function buttonCheck(element) {
 					$(element)
 						.parent()
 						.after(inputForm);
-				} else {
+				} else if (active.text() !== 'Expense') {
 					$('#expenseDescription').remove();
 				}
 				break;
@@ -807,14 +807,23 @@ function screenSize() {
 }
 
 function verifyAmt(element) {
+	console.log(element);
 	var id = $(element).attr('id');
 	var val = $(element).val();
 	if (id == 'fareAmt' && val > 100) {
-		if (!window.confirm('Fare entered is more than $100. Is this correct?')) {
+		if (
+			!window.confirm(
+				'Fare entered is more than $100.\n\nPress OK if this is correct.\nPress Cancel to reset Fare Amount.'
+			)
+		) {
 			$(element).val(null);
 		}
-	} else if (id == 'expenseAmt' && val > 50) {
-		if (!window.confirm('Expense entered is more than $50. Is this correct?')) {
+	} else if (id == 'expenseAmount' && val > 50) {
+		if (
+			!window.confirm(
+				'Expense entered is more than $50.\n\nPress OK if this is correct.\nPress Cancel to reset Expense Amount.'
+			)
+		) {
 			$(element).val(null);
 		}
 	}
