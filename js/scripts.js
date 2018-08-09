@@ -831,6 +831,11 @@ function verifyAmt(element) {
 		if (id == 'fareAmt') {
 			div.attr('title', 'Confirm Fare');
 			div.dialog({
+				position: {
+					my: 'center',
+					at: 'center',
+					of: window
+				},
 				dialogClass: 'no-close',
 				resizable: false,
 				height: 'auto',
@@ -875,9 +880,10 @@ function verifyAmt(element) {
 		}
 		$('.ui-dialog-buttonset')
 			.children()
+			.addClass('btn btn-secondary');
+		$('.ui-dialog')
 			.css('display', 'none')
-			.addClass('btn btn-secondary')
+			.addClass('position-fixed')
 			.css('display', 'inline');
-		$('.ui-dialog').addClass('position-fixed');
 	}
 }
