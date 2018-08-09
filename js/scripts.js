@@ -1,6 +1,5 @@
 var scriptId = '1C_BiKPvlMv0IhMxmedlE4GWHz_lLFGWX6MLafwx9KlOwbK87h4koXYQp';
 $(document).ready(function() {
-	window.alert('open, damn you');
 	console.log([sessionStorage.getItem('id'), sessionStorage.getItem('email')]);
 	var email = sessionStorage.getItem('email');
 	if (email) {
@@ -157,7 +156,7 @@ function addForm(formName) {
 					type: question.subtype,
 					placeholder: question.placeholder ? question.placeholder : null,
 					id: question.name,
-					onclick: question.click ? question.click : null
+					focusout: question.focusout ? question.focusout : null
 				};
 				if (question.step) {
 					elementType.step = question.step;
@@ -804,5 +803,19 @@ function screenSize() {
 		$('#menuButtons').removeClass('btn-group');
 		$('#menuButtons').addClass('btn-group-vertical');
 		toggleMenu('true');
+	}
+}
+
+function verifyAmt(element) {
+	var id = $(element).attr('id');
+	var val = $(element).val();
+	if (id == 'fareAmt' && val > 100) {
+		if (!window.confirm('Fare entered is more than $100. Is this correct?')) {
+			$(element).val(null);
+		}
+	} else if (id == 'expenseAmt' && val > 50) {
+		if (!window.confirm('Expense entered is more than $50. Is this correct?')) {
+			$(element).val(null);
+		}
 	}
 }

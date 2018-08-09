@@ -6,8 +6,7 @@ var forms = {
 				label: 'Confirmation #',
 				type: 'input',
 				subtype: 'text',
-				options: [],
-				click: ''
+				options: []
 			},
 			{
 				name: 'fareAmt',
@@ -17,7 +16,7 @@ var forms = {
 				step: '0.01',
 				placeholder: '$',
 				options: [],
-				click: ''
+				focusout: 'verifyAmt(this)'
 			},
 			{
 				name: 'fareType',
@@ -61,7 +60,7 @@ var forms = {
 				step: '0.01',
 				placeholder: '$',
 				options: [],
-				click: ''
+				focusout: 'verifyAmt(this)'
 			},
 			{
 				name: 'expenseType',
