@@ -116,6 +116,7 @@ function addNewUser() {
 			if (responseObj.status) {
 				sessionStorage.setItem('clocked', 'false');
 				sessionStorage.setItem('email', email);
+				sessionStorage.setItem('id', responseObj.id);
 				parent.window.location.href = './main.html';
 			} else {
 				$('#warning').html(responseObj.message);

@@ -1,5 +1,6 @@
 var scriptId = '1C_BiKPvlMv0IhMxmedlE4GWHz_lLFGWX6MLafwx9KlOwbK87h4koXYQp';
 $(document).ready(function() {
+	window.alert('open, damn you');
 	console.log([sessionStorage.getItem('id'), sessionStorage.getItem('email')]);
 	var email = sessionStorage.getItem('email');
 	if (email) {
@@ -450,7 +451,7 @@ function buttonCheck(element) {
 		var active = $(element).children('.active');
 		switch (id) {
 			case 'fareType':
-				if (active.text() == 'Credit Card') {
+				if (active.text() == 'Credit Card' && $('#ccForm').length === 0) {
 					var inputForm = $(document.createElement('div'))
 						.addClass('form-group')
 						.attr({ id: 'ccForm' });
@@ -777,7 +778,6 @@ function toggleMenu(state) {
 
 function updateNotification(update) {
 	var noteText = $('.notificationText');
-
 	switch (update) {
 		case 'overdue':
 			noteText.html('Your vehicle is overdue for an oil change. Report to your manager after your shift.');
@@ -790,46 +790,6 @@ function updateNotification(update) {
 		case 'default':
 			break;
 	}
-	// Array.from(noteText).forEach(function(notification) {
-	// 	switch (update) {
-	// 		case 'overdue':
-	// 			var parent = notification.parentElement;
-	// 			parent.style.display = 'flex';
-	//
-	// 			if (window.innerWidth <= 768) {
-	// 				var menuWidth = document.getElementsByClassName('menu')[0].offsetWidth;
-	// 				var menuHeight = document.getElementsByClassName('menu')[0].offsetHeight;
-	//
-	// 				parent.style.width = 'calc(100% - ' + menuWidth + 'px)';
-	// 				parent.style.height = menuHeight;
-	// 			} else {
-	// 				parent.style.width = '100%';
-	// 				parent.style.height = '10%';
-	// 			}
-	// 			notification.innerHTML =
-	// 				'Your vehicle is overdue for an oil change. Report to your manager after your shift.';
-	// 			break;
-	// 		case 'warning':
-	// 			var parent = notification.parentElement;
-	// 			parent.style.display = 'flex';
-	//
-	// 			if (window.innerWidth <= 768) {
-	// 				var menuWidth = document.getElementsByClassName('menu')[0].offsetWidth;
-	// 				var menuHeight = document.getElementsByClassName('menu')[0].offsetHeight;
-	//
-	// 				parent.style.width = 'calc(100% - ' + menuWidth + 'px)';
-	// 				parent.style.height = menuHeight;
-	// 			} else {
-	// 				parent.style.width = '100%';
-	// 				parent.style.height = '10%';
-	// 			}
-	// 			notification.innerHTML =
-	// 				'Your vehicle is due for an oil change. Please schedule one before your next service date.';
-	// 			break;
-	// 		default:
-	// 			break;
-	// 	}
-	// });
 }
 
 function closeNotification() {
