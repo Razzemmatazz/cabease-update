@@ -830,7 +830,7 @@ function verifyAmt(element) {
 				dialogClass: 'no-close',
 				resizable: false,
 				height: 'auto',
-				maxWidth: windowSize,
+				width: windowSize,
 				modal: true,
 				buttons: {
 					Yes: function() {
@@ -845,7 +845,9 @@ function verifyAmt(element) {
 		} else {
 			div.attr('title', 'Confirm Expense');
 			div.dialog({
-				dialogClass: 'no-close',
+				classes: {
+					'ui-dialog': 'no-close'
+				},
 				resizable: false,
 				height: 'auto',
 				maxWidth: windowSize,
@@ -872,5 +874,6 @@ function verifyAmt(element) {
 			.css('display', 'none')
 			.addClass('btn btn-secondary')
 			.css('display', 'inline');
+		$('.ui-dialog').addClass('position-fixed');
 	}
 }

@@ -156,7 +156,7 @@ input[type='number']::-webkit-outer-spin-button {
 	margin: 0;
 }
 .position-fixed {
-	z-index: 2000;
+	z-index: 900;
 }
 #notification {
 	background-color: #ccc;
