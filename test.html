@@ -7,36 +7,8 @@
   </head>
   <body>
     <script>
-    var scriptId = '1C_BiKPvlMv0IhMxmedlE4GWHz_lLFGWX6MLafwx9KlOwbK87h4koXYQp';
-function addNewUser() {
-	var email = 'me@me.com';
-	var password = '1234';
-	gapi.client.script.scripts
-		.run({
-			scriptId: scriptId,
-			resource: {
-				function: 'addNewUser',
-				parameters: [email, password],
-				devMode: true
-			}
-		})
-		.then(function(response) {
-			var responseObj = response.result.response.result;
-			console.log(responseObj);
-			// if (responseObj.status) {
-			// 	sessionStorage.setItem('clocked', 'false');
-			// 	sessionStorage.setItem('email', email);
-			// 	sessionStorage.setItem('id', responseObj.id);
-			// } else {
-			// 	$('#warning').html(responseObj.message);
-			// }
-		});
-}
-$(document).ready(function() {
+    $(document).ready(function() {
 	console.log([sessionStorage.getItem('id'), sessionStorage.getItem('email')]);
-	setTimeout(function() {
-		addNewUser();
-	}, 2000);
 });
 </script>
 <script src='./js/gapi.js'></script>

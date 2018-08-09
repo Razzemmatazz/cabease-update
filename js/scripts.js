@@ -810,21 +810,67 @@ function verifyAmt(element) {
 	console.log(element);
 	var id = $(element).attr('id');
 	var val = $(element).val();
-	if (id == 'fareAmt' && val > 100) {
-		if (
-			!window.confirm(
-				'Fare entered is more than $100.\n\nPress OK if this is correct.\nPress Cancel to reset Fare Amount.'
-			)
-		) {
-			$(element).val(null);
+	if ((id == 'fareAmt' && val > 100) || (id == 'expenseAmount' && val > 50)) {
+		if ($('#dialog-confirm').length > 0) {
+			$('#dialog-confirm').remove();
 		}
-	} else if (id == 'expenseAmount' && val > 50) {
-		if (
-			!window.confirm(
-				'Expense entered is more than $50.\n\nPress OK if this is correct.\nPress Cancel to reset Expense Amount.'
-			)
-		) {
-			$(element).val(null);
+		var div = $(document.createElement('div')).attr({ id: 'dialog-confirm' });
+		var p = $(document.createElement('p')).html('You entered $' + val + '.\nIs this amount correct?');
+		div.append(p);
+		$(document.body).append(div);
+		var windowSize;
+		if (window.innerWidth <= 768) {
+			windowSize = window.innerWidth * 0.9;
+		} else {
+			windowSize = 400;
 		}
+		if (id == 'fareAmt') {
+			div.attr('title', 'Confirm Fare');
+			div.dialog({
+				dialogClass: 'no-close',
+				resizable: false,
+				height: 'auto',
+				maxWidth: windowSize,
+				modal: true,
+				buttons: {
+					Yes: function() {
+						$(this).dialog('close');
+					},
+					No: function() {
+						$(element).val(null);
+						$(this).dialog('close');
+					}
+				}
+			});
+		} else {
+			div.attr('title', 'Confirm Expense');
+			div.dialog({
+				dialogClass: 'no-close',
+				resizable: false,
+				height: 'auto',
+				maxWidth: windowSize,
+				modal: true,
+				buttons: [
+					{
+						text: 'Yes',
+						click: function() {
+							$(this).dialog('close');
+						}
+					},
+					{
+						text: 'No',
+						click: function() {
+							$(element).val(null);
+							$(this).dialog('close');
+						}
+					}
+				]
+			});
+		}
+		$('.ui-dialog-buttonset')
+			.children()
+			.css('display', 'none')
+			.addClass('btn btn-secondary')
+			.css('display', 'inline');
 	}
 }

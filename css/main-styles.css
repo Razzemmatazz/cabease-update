@@ -1,3 +1,26 @@
+/* Pop-up, amount confirmation */
+.ui-widget-content {
+	background-color: #333 !important;
+}
+.ui-dialog-content {
+	color: #fff !important;
+}
+.no-close .ui-dialog-titlebar-close {
+	display: none;
+}
+.ui-dialog-buttonset {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	float: none !important;
+}
+.ui-dialog-buttonset button {
+	font-size: 1.5em !important;
+	margin-right: 0 !important;
+	padding-right: 0.9em !important;
+	padding-left: 0.9em !important;
+}
+/* Pop-up, Gapi confirmation */
 .gapi-verification {
 	top: 12vh;
 	left: 0;
