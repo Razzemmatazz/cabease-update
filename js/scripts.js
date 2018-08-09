@@ -836,7 +836,9 @@ function verifyAmt(element) {
 					at: 'center',
 					of: window
 				},
-				dialogClass: 'no-close',
+				classes: {
+					'ui-dialog': 'no-close'
+				},
 				resizable: false,
 				height: 'auto',
 				width: windowSize,
@@ -854,6 +856,11 @@ function verifyAmt(element) {
 		} else {
 			div.attr('title', 'Confirm Expense');
 			div.dialog({
+				position: {
+					my: 'center',
+					at: 'center',
+					of: window
+				},
 				classes: {
 					'ui-dialog': 'no-close'
 				},
