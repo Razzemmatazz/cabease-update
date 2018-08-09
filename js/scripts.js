@@ -834,7 +834,7 @@ function verifyAmt(element) {
 				position: {
 					my: 'center',
 					at: 'center',
-					of: window
+					of: window.document.body
 				},
 				classes: {
 					'ui-dialog': 'no-close'
@@ -859,7 +859,7 @@ function verifyAmt(element) {
 				position: {
 					my: 'center',
 					at: 'center',
-					of: window
+					of: window.document.body
 				},
 				classes: {
 					'ui-dialog': 'no-close'
