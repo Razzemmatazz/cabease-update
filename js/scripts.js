@@ -803,6 +803,7 @@ function closeNotification() {
 
 function screenSize() {
 	var width = window.innerWidth;
+	windowHeight = window.innerHeight;
 	if (width <= 768) {
 		$('#menuButtons').removeClass('btn-group');
 		$('#menuButtons').addClass('btn-group-vertical');
@@ -830,11 +831,12 @@ function verifyAmt(element) {
 		}
 		if (id == 'fareAmt') {
 			div.attr('title', 'Confirm Fare');
-			div.dialog({
+			var dialogOptions = {
 				position: {
 					my: 'center',
 					at: 'center',
-					of: screen
+					of: window,
+					collision: 'fit'
 				},
 				classes: {
 					'ui-dialog': 'no-close'
@@ -852,10 +854,10 @@ function verifyAmt(element) {
 						$(this).dialog('close');
 					}
 				}
-			});
+			};
 		} else {
 			div.attr('title', 'Confirm Expense');
-			div.dialog({
+			var dialogOptions = {
 				position: {
 					my: 'center',
 					at: 'center',
@@ -883,7 +885,14 @@ function verifyAmt(element) {
 						}
 					}
 				]
-			});
+			};
+		}
+		if (window.innerHeight < windowHeight) {
+			setTimeout(function() {
+				div.dialog(dialogOptions);
+			}, 500);
+		} else {
+			div.dialog(dialogOptions);
 		}
 		$('.ui-dialog-buttonset')
 			.children()
