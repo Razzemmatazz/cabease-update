@@ -861,7 +861,8 @@ function verifyAmt(element) {
 				position: {
 					my: 'center',
 					at: 'center',
-					of: screen
+					of: window,
+					collision: 'fit'
 				},
 				classes: {
 					'ui-dialog': 'no-close'
