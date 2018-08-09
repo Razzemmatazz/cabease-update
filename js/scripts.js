@@ -45,7 +45,7 @@ function createMenu(status) {
 			{
 				id: 'newExpense',
 				text: 'Add Expense/Gas',
-				class: 'btn btn-dark'
+				class: 'btn btn-secondary'
 			},
 			{
 				id: 'changeFare',
@@ -55,7 +55,7 @@ function createMenu(status) {
 			{
 				id: 'logon',
 				text: 'Log Off',
-				class: 'btn btn-dark'
+				class: 'btn btn-secondary'
 			}
 		],
 		false: [
@@ -91,6 +91,10 @@ function openTab(element) {
 		console.log('Open Tab ' + name);
 		if (name == '☰') {
 			toggleMenu($('#menuButtons').val());
+			$('#menu')
+				.parent()
+				.toggleClass('active')
+				.toggleClass('focus');
 		} else if (name == 'Edit Fare') {
 			$('#currentForm').html('');
 			$('#editTable').html('<div class="loader"></div>');
