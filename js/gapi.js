@@ -23,8 +23,9 @@ function initClient() {
 			if (!gapi.auth2.getAuthInstance().isSignedIn.get()) {
 				$('.gapi-verification').removeClass('d-none');
 			}
-			gapi.client.load('https://script.googleapis.com/$discovery/rest?version=v1');
-
+			gapi.client.load('https://script.googleapis.com/$discovery/rest?version=v1').then(function() {
+				window.gapiLoaded = true;
+			});
 			// Listen for sign-in state changes.
 		});
 }

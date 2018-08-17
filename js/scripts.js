@@ -1,5 +1,6 @@
 var scriptId = '1C_BiKPvlMv0IhMxmedlE4GWHz_lLFGWX6MLafwx9KlOwbK87h4koXYQp';
 $(document).ready(function() {
+	gapiLoaded = false;
 	console.log([sessionStorage.getItem('id'), sessionStorage.getItem('email')]);
 	var email = sessionStorage.getItem('email');
 	if (email) {
@@ -26,6 +27,7 @@ $(document).ready(function() {
 			.parent()
 			.click();
 	}
+	checkStorageForVehicle();
 	screenSize();
 });
 
@@ -270,7 +272,7 @@ function submit(formName) {
 			obj.menuType = 'Add Fare';
 			obj.confirmationNum = $(inputs[0]).val();
 			obj.fareAmt = $(inputs[1]).val();
-
+			obj.log = vehicleNum;
 			obj.fareType = $(selectedButtons[0]).text();
 			if (obj.fareType == 'Credit Card') {
 				obj.tip = $(inputs[2]).val() ? $(inputs[2]).val() : '';
@@ -315,6 +317,7 @@ function submit(formName) {
 					.children('textarea')
 					.val();
 			}
+			obj.log = vehicleNum;
 			break;
 		case 'logOnForm':
 			obj.menuType = 'Log On/ Log Off';
@@ -902,5 +905,32 @@ function verifyAmt(element) {
 			.css('display', 'none')
 			.addClass('position-fixed')
 			.css('display', 'inline');
+	}
+}
+
+function checkStorageForVehicle() {
+	console.log(gapiLoaded);
+	var hasVehicleNum = sessionStorage.getItem('vehicleNum');
+	if (hasVehicleNum) {
+		window.vehicleNum = sessionStorage.getItem('vehicleNum');
+	} else {
+		var date = new Date().getTime();
+		var checkGapi = setInterval(function() {
+			if (gapiLoaded) {
+				clearInterval(checkGapi);
+				gapi.client.script.scripts
+					.run({
+						scriptId: scriptId,
+						resource: {
+							function: 'getVehicleNum',
+							parameters: [sessionStorage.getItem('id')]
+						}
+					})
+					.then(function(response) {
+						window.vehicleNum = response.result.response.result;
+						console.log(vehicleNum);
+					});
+			}
+		}, 500);
 	}
 }
