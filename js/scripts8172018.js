@@ -27,7 +27,7 @@ $(document).ready(function() {
 			.parent()
 			.click();
 	}
-	checkStorageForVehicle();
+	checkSessionForVehicle();
 	screenSize();
 });
 
@@ -327,6 +327,7 @@ function submit(formName) {
 			obj.description = 'Fleet Vehicle ' + $('#vehicleNum').val();
 			obj.mileage = $('#odometer').val();
 			if (obj.log == 'Log On') {
+				window.vehicleNum = $('#vehicleNum').val();
 				gapi.client.script.scripts
 					.run({
 						scriptId: scriptId,
@@ -908,7 +909,7 @@ function verifyAmt(element) {
 	}
 }
 
-function checkStorageForVehicle() {
+function checkSessionForVehicle() {
 	console.log(gapiLoaded);
 	var hasVehicleNum = sessionStorage.getItem('vehicleNum');
 	if (hasVehicleNum) {
