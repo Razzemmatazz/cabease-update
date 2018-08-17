@@ -272,7 +272,7 @@ function submit(formName) {
 			obj.menuType = 'Add Fare';
 			obj.confirmationNum = $(inputs[0]).val();
 			obj.fareAmt = $(inputs[1]).val();
-			obj.log = vehicleNum;
+			obj.log = vehicleNum ? vehicleNum : 0;
 			obj.fareType = $(selectedButtons[0]).text();
 			if (obj.fareType == 'Credit Card') {
 				obj.tip = $(inputs[2]).val() ? $(inputs[2]).val() : '';
@@ -317,7 +317,7 @@ function submit(formName) {
 					.children('textarea')
 					.val();
 			}
-			obj.log = vehicleNum;
+			obj.log = vehicleNum ? vehicleNum : 0;
 			break;
 		case 'logOnForm':
 			obj.menuType = 'Log On/ Log Off';
