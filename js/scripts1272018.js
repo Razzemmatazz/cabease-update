@@ -250,6 +250,18 @@ function addForm(formName) {
   $("#currentForm")
     .html(form)
     .css({ display: "block", width: "100%", height: "100%" });
+  console.log(formName);
+  if (formName === "Add Fare") {
+    $("#fareDiscrepancy").attr("value", "No");
+    $("#fareDiscrepancy-buttons")
+      .children("label")
+      .each(function(index) {
+        console.log($(this));
+        if (index === 1) {
+          $(this).addClass("active");
+        }
+      });
+  }
 }
 
 function submit(formName) {
@@ -280,48 +292,23 @@ function submit(formName) {
   switch (formName) {
     case "addFareForm":
       obj.menuType = "Add Fare";
-      obj.confirmationNum = $(inputs[0]).val();
-      obj.fareAmt = $(inputs[1]).val();
+      obj.confirmationNum = $("#confirmation").val();
+      obj.fareAmt = $("#fareAmt").val();
       obj.log = vehicleNum ? vehicleNum : 0;
-      obj.fareType = $(selectedButtons[0]).text();
+      obj.fareType = $("#fareType").val();
       if (obj.fareType == "Credit Card") {
-        obj.tip = $(inputs[2]).val() ? $(inputs[2]).val() : "";
+        obj.tip = $("#ccTip").val() || "";
+        obj.description =
+          obj.description ||
+          $("#stateStatus").val() + ", " + $("#paidStatus").val();
       }
-      $(selectedButtons).each(function(index) {
-        var button = $(this).text();
-        var parent = $(this)
-          .parent()
-          .attr("id");
-        switch (parent) {
-          case "fareType":
-            obj.fareType = button;
-            break;
-          case "stateStatus":
-            if (!obj.description) {
-              obj.description =
-                $(selectedButtons[1]).text() +
-                ", " +
-                $(selectedButtons[2]).text();
-            }
-            break;
-          case "paidStatus":
-            if (!obj.description) {
-              obj.description =
-                $(selectedButtons[1]).text() +
-                ", " +
-                $(selectedButtons[2]).text();
-            }
-            break;
-          case "fareDiscrepancy":
-            if (button == "Yes" && obj.description == "") {
-              obj.description = $(form)
-                .children(".form-group")
-                .children("textarea")
-                .val();
-            }
-            break;
-        }
-      });
+      if (
+        $("#fareDiscrepancy").val() === "Yes" &&
+        $("#discrepancyDescription").val().length
+      ) {
+        obj.description += obj.description.length > 1 ? "\n" : "";
+        obj.description += "Discrepancy: " + $("#discrepancyDescription").val();
+      }
       break;
     case "addExpenseForm":
       obj.menuType = "Add Expense/ Add Gas";
@@ -583,20 +570,20 @@ function buttonCheck(element) {
           $("#ccPaid").remove();
         }
         break;
-      case "fareDiscrepancy":
+      case "fareDiscrepancy-buttons":
         if (
           active.text() == "Yes" &&
           $("#discrepancyDescription").length === 0
         ) {
-          var inputForm = $(document.createElement("div"))
-            .addClass("form-group")
-            .attr({ id: "discrepancyDescription" });
+          var inputForm = $(document.createElement("div")).addClass(
+            "form-group"
+          );
           var label = $(document.createElement("label")).html(
             "Describe the Discrepancy"
           );
           var input = $(document.createElement("textarea")).attr({
             row: 3,
-            name: "discrepancyDescription"
+            id: "discrepancyDescription"
           });
           inputForm.append(label, input);
           $(element)
@@ -606,7 +593,7 @@ function buttonCheck(element) {
           $("#discrepancyDescription").remove();
         }
         break;
-      case "expenseType":
+      case "expenseType-buttons":
         if (
           active.text() == "Expense" &&
           $("#expenseDescription").length === 0
