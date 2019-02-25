@@ -10,6 +10,21 @@ $(document).ready(function() {
   }
 });
 
+function validateForm(form) {
+  if (!form.checkValidity()) {
+    console.log("invalid form");
+    return false;
+  } else {
+    console.log("valid form");
+    if ($("#confirmPassword").length > 0) {
+      addNewUser();
+    } else {
+      validateLogin();
+    }
+  }
+  $(form).toggleClass("needs-validation was-validated");
+}
+
 function validateLogin() {
   var email = $("#email").val();
   var password = $("#password").val();
