@@ -1,7 +1,6 @@
 var scriptId = "1C_BiKPvlMv0IhMxmedlE4GWHz_lLFGWX6MLafwx9KlOwbK87h4koXYQp";
 $(document).ready(function() {
   gapiLoaded = false;
-  // console.log([sessionStorage.getItem("id"), sessionStorage.getItem("email")]);
   var email = sessionStorage.getItem("email");
   if (email) {
     $("main").removeClass("d-none");
@@ -94,7 +93,6 @@ function openTab(element) {
     var name = $(element)
       .children(".active")
       .text();
-    // console.log("Open Tab " + name);
     if (name == "☰") {
       toggleMenu($("#menuButtons").val());
       $("#menu")
@@ -244,7 +242,6 @@ function addForm(formName) {
     $("#fareDiscrepancy-buttons")
       .children("label")
       .each(function(index) {
-        console.log($(this));
         if (index === 1) {
           $(this).addClass("active");
         }
@@ -253,7 +250,6 @@ function addForm(formName) {
 }
 
 function submit(formName) {
-  console.log(formName);
   var obj = {
     userId: sessionStorage.getItem("id"),
     menuType: "",
@@ -354,8 +350,6 @@ function submit(formName) {
 }
 
 function submitted(response, obj) {
-  console.log(response);
-  console.log(obj);
   var formName = obj.formName;
   var logStatus = obj.log;
   console.log("Submitted " + formName);

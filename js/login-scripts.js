@@ -33,8 +33,8 @@ function validateLogin() {
 function verifyEmail(element) {
   var email = $(element).val();
   google.script.run
-    .withSuccessHandler(function(resp) {
-      var status = resp.result.response.result.userStatus;
+    .withSuccessHandler(function(response) {
+      var status = response.userStatus;
       var warning = $("#warning");
       switch (status) {
         case "invalid":
