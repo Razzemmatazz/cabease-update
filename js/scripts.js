@@ -239,7 +239,6 @@ function addForm(formName) {
   $("#currentForm")
     .html(form)
     .css({ display: "block", width: "100%", height: "100%" });
-  console.log(formName);
   if (formName === "Add Fare") {
     $("#fareDiscrepancy").attr("value", "No");
     $("#fareDiscrepancy-buttons")
@@ -272,7 +271,6 @@ function submit(formName) {
   var inputs = $(form)
     .children(".form-group")
     .children("input");
-  console.log(inputs);
   var selectedButtons = $(form)
     .children(".form-group")
     .children(".btn-group-toggle")
@@ -418,7 +416,10 @@ function submitted(response, obj) {
       sessionStorage.setItem("email", "");
       sessionStorage.setItem("id", "");
       sessionStorage.setItem("clocked", "false");
-      parent.window.location.href = "./index.html";
+      window.open(
+        "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec",
+        "_top"
+      );
     }
   }
 }
