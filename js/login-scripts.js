@@ -3,7 +3,8 @@ var scriptId = "1C_BiKPvlMv0IhMxmedlE4GWHz_lLFGWX6MLafwx9KlOwbK87h4koXYQp";
 $(document).ready(function() {
   var email = sessionStorage.getItem("email");
   if (email) {
-    parent.window.location.href = "./main.html";
+    parent.window.location.href =
+      "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main";
   }
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   var forms = document.getElementsByClassName("needs-validation");
