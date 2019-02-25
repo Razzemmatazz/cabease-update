@@ -345,6 +345,10 @@ function submit(formName) {
     obj.log,
     obj.mileage
   ];
+  console.log({
+    formName: formName,
+    log: obj.log
+  });
   google.script.run
     .withSuccessHandler(submitted)
     .withUserObject({
@@ -355,6 +359,7 @@ function submit(formName) {
 }
 
 function submitted(obj) {
+  console.log(obj);
   var formName = obj.formName;
   var logStatus = obj.log;
   console.log("Submitted " + formName);
