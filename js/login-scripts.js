@@ -4,7 +4,11 @@ $(document).ready(function() {
   var email = sessionStorage.getItem("email");
   if (email) {
     fetch(
-      "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main"
+      "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main",
+      {
+        method: "GET",
+        mode: "no-cors"
+      }
     );
   }
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -43,7 +47,11 @@ function validateLogin() {
         sessionStorage.setItem("email", response.user.email);
         sessionStorage.setItem("id", response.user.id);
         fetch(
-          "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main"
+          "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main",
+          {
+            method: "GET",
+            mode: "no-cors"
+          }
         );
       } else {
         $("#warning").html("Invalid Email or Password");
@@ -104,7 +112,11 @@ function addNewUser() {
         sessionStorage.setItem("email", email);
         sessionStorage.setItem("id", responseObj.id);
         fetch(
-          "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main"
+          "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main",
+          {
+            method: "GET",
+            mode: "no-cors"
+          }
         );
       } else {
         $("#warning").html(responseObj.message);
