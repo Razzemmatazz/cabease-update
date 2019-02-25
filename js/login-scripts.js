@@ -3,8 +3,9 @@ var scriptId = "1C_BiKPvlMv0IhMxmedlE4GWHz_lLFGWX6MLafwx9KlOwbK87h4koXYQp";
 $(document).ready(function() {
   var email = sessionStorage.getItem("email");
   if (email) {
-    parent.window.location.href =
-      "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main";
+    fetch(
+      "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main"
+    );
   }
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   var forms = document.getElementsByClassName("needs-validation");
@@ -41,8 +42,9 @@ function validateLogin() {
         sessionStorage.setItem("clocked", "false");
         sessionStorage.setItem("email", response.user.email);
         sessionStorage.setItem("id", response.user.id);
-        parent.window.location.href =
-          "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main";
+        fetch(
+          "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main"
+        );
       } else {
         $("#warning").html("Invalid Email or Password");
       }
@@ -101,8 +103,9 @@ function addNewUser() {
         sessionStorage.setItem("clocked", "false");
         sessionStorage.setItem("email", email);
         sessionStorage.setItem("id", responseObj.id);
-        parent.window.location.href =
-          "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main";
+        fetch(
+          "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main"
+        );
       } else {
         $("#warning").html(responseObj.message);
       }
