@@ -131,16 +131,13 @@ function addForm(formName) {
       novalidate: "novalidate",
       action: "javascript:" + formData.submit.onclick
     });
-  $(form).submit(function(event) {
+  form.submit(function(event) {
+    form.toggleClass("needs-validation was-validated");
     if (!$(form)[0].checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
-      console.log("invalid");
+      return false;
     } else {
-      $(form)
-        .children(".submit-button")
-        .prop("disabled", true);
-      $(form).addClass("was-validated");
+      form.children(".submit-button").prop("disabled", true);
+      form.addClass("was-validated");
       return;
     }
   });
