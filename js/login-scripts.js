@@ -3,12 +3,9 @@ var scriptId = "1C_BiKPvlMv0IhMxmedlE4GWHz_lLFGWX6MLafwx9KlOwbK87h4koXYQp";
 $(document).ready(function() {
   var email = sessionStorage.getItem("email");
   if (email) {
-    fetch(
+    window.open(
       "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main",
-      {
-        method: "GET",
-        mode: "no-cors"
-      }
+      "_top"
     );
   }
 });
@@ -22,12 +19,9 @@ function validateLogin() {
         sessionStorage.setItem("clocked", "false");
         sessionStorage.setItem("email", response.user.email);
         sessionStorage.setItem("id", response.user.id);
-        fetch(
+        window.open(
           "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main",
-          {
-            method: "GET",
-            mode: "no-cors"
-          }
+          "_top"
         );
       } else {
         $("#warning").html("Invalid Email or Password");
@@ -87,12 +81,9 @@ function addNewUser() {
         sessionStorage.setItem("clocked", "false");
         sessionStorage.setItem("email", email);
         sessionStorage.setItem("id", responseObj.id);
-        fetch(
+        window.open(
           "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main",
-          {
-            method: "GET",
-            mode: "no-cors"
-          }
+          "_top"
         );
       } else {
         $("#warning").html(responseObj.message);
