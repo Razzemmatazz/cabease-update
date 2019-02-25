@@ -253,6 +253,7 @@ function addForm(formName) {
 }
 
 function submit(formName) {
+  console.log(formName);
   var obj = {
     userId: sessionStorage.getItem("id"),
     menuType: "",
@@ -353,6 +354,7 @@ function submit(formName) {
 }
 
 function submitted(response, obj) {
+  console.log(response);
   console.log(obj);
   var formName = obj.formName;
   var logStatus = obj.log;
