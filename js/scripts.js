@@ -128,16 +128,15 @@ function addForm(formName) {
     .addClass("needs-validation")
     .attr({
       id: formName,
-      novalidate: "novalidate",
       action: "javascript:" + formData.submit.onclick
-    });
+    })
+    .prop("novalidate", true);
   form.submit(function(event) {
     form.toggleClass("needs-validation was-validated");
     if (!$(form)[0].checkValidity()) {
       return false;
     } else {
       form.children(".submit-button").prop("disabled", true);
-      form.addClass("was-validated");
       return;
     }
   });
