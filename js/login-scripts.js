@@ -32,6 +32,7 @@ function validateLogin() {
 
 function verifyEmail(element) {
   var email = $(element).val();
+  console.log(email);
   google.script.run
     .withSuccessHandler(function(response) {
       var status = response.userStatus;
