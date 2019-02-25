@@ -99,7 +99,8 @@ function addNewUser() {
         sessionStorage.setItem("clocked", "false");
         sessionStorage.setItem("email", email);
         sessionStorage.setItem("id", responseObj.id);
-        parent.window.location.href = "./main.html";
+        parent.window.location.href =
+          "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main";
       } else {
         $("#warning").html(responseObj.message);
       }
