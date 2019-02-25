@@ -36,10 +36,10 @@ function validateLogin() {
   var password = $("#password").val();
   google.script.run
     .withSuccessHandler(function(response) {
-      if (responseObj.status) {
+      if (response.status) {
         sessionStorage.setItem("clocked", "false");
-        sessionStorage.setItem("email", responseObj.user.email);
-        sessionStorage.setItem("id", responseObj.user.id);
+        sessionStorage.setItem("email", response.user.email);
+        sessionStorage.setItem("id", response.user.id);
         parent.window.location.href = "./main.html";
       } else {
         $("#warning").html("Invalid Email or Password");
