@@ -347,11 +347,16 @@ function submit(formName) {
   ];
   google.script.run
     .withSuccessHandler(submitted)
-    .withUserObject(formName, obj.log)
+    .withUserObject({
+      formName: formName,
+      log: obj.log
+    })
     .sheetUpdate(sessionStorage.getItem("id"), output);
 }
 
-function submitted(formName, logStatus) {
+function submitted(obj) {
+  var formName = obj.formName;
+  var logStatus = obj.log;
   console.log("Submitted " + formName);
   if (formName == "addFareForm") {
     var parentDiv = $(document.createElement("div")).css({
