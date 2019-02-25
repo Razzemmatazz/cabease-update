@@ -104,21 +104,10 @@ function openTab(element) {
     } else if (name == "Edit Fare") {
       $("#currentForm").html("");
       $("#editTable").html('<div class="loader"></div>');
-      gapi.client.script.scripts
-        .run({
-          scriptId: scriptId,
-          resource: {
-            function: "getPastFares",
-            parameters: [sessionStorage.getItem("id")]
-          }
-        })
-        .then(function(response) {
-          if (response.status === 200) {
-            editFare(response.result.response.result);
-          } else {
-            noFare();
-          }
-        });
+      google.script.run
+        .withSuccessHandler(editFare)
+        .withFailureHandler(noFare)
+        .getPastFares(sessionStorage.getItem("id"));
       toggleMenu("true");
     } else if (name == "Log On" || name == "Log Off") {
       $("#editTable").html("");
@@ -331,29 +320,14 @@ function submit(formName) {
       obj.mileage = $("#odometer").val();
       if (obj.log == "Log On") {
         window.vehicleNum = $("#vehicleNum").val();
-        gapi.client.script.scripts
-          .run({
-            scriptId: scriptId,
-            resource: {
-              function: "checkMileage",
-              parameters: [
-                $("#vehicleNum").val(),
-                obj.mileage,
-                sessionStorage.getItem("id"),
-                sessionStorage.getItem("email")
-              ]
-            }
-          })
-          .then(function(response) {
-            if (response.result.response.result !== "") {
-              updateNotification(response.result.response.result);
-
-              $("#notification").removeClass("d-none");
-            }
-            if (response.status !== 200) {
-              console.log("check mileage failed");
-            }
-          });
+        google.script.run
+          .withSuccessHandler(updateNotification)
+          .checkMileage(
+            $("#vehicleNum").val(),
+            obj.mileage,
+            sessionStorage.getItem("id"),
+            sessionStorage.getItem("email")
+          );
       }
       break;
   }
@@ -371,22 +345,10 @@ function submit(formName) {
     obj.log,
     obj.mileage
   ];
-  gapi.client.script.scripts
-    .run({
-      scriptId: scriptId,
-      resource: {
-        function: "sheetUpdate",
-        parameters: [sessionStorage.getItem("id"), output]
-      }
-    })
-    .then(function(response) {
-      if (response.status === 200) {
-        console.log("Submit to sheet succeeded");
-        submitted(formName, obj.log);
-      } else {
-        console.log("Submit to sheet failed");
-      }
-    });
+  google.script.run
+    .withSuccessHandler(submitted)
+    .withUserObject(formName, obj.log)
+    .sheetUpdate(sessionStorage.getItem("id"), output);
 }
 
 function submitted(formName, logStatus) {
@@ -786,21 +748,7 @@ function editSave(button, tableRow) {
       output.push(item.innerHTML);
     });
     output.shift();
-    gapi.client.script.scripts
-      .run({
-        scriptId: scriptId,
-        resource: {
-          function: "sheetUpdate",
-          parameters: [
-            sessionStorage.getItem("id"),
-            output,
-            row.childNodes[1].innerHTML
-          ]
-        }
-      })
-      .then(function(response) {
-        console.log(response);
-      });
+    google.script.run.sheetUpdate(sessionStorage.getItem("id"));
   }
 }
 
@@ -960,27 +908,15 @@ function verifyAmt(element) {
 }
 
 function checkSessionForVehicle() {
-  // console.log(gapiLoaded);
   var hasVehicleNum = sessionStorage.getItem("vehicleNum");
   if (hasVehicleNum) {
     window.vehicleNum = sessionStorage.getItem("vehicleNum");
   } else {
     var date = new Date().getTime();
-    var checkGapi = setInterval(function() {
-      if (gapiLoaded) {
-        clearInterval(checkGapi);
-        gapi.client.script.scripts
-          .run({
-            scriptId: scriptId,
-            resource: {
-              function: "getVehicleNum",
-              parameters: [sessionStorage.getItem("id")]
-            }
-          })
-          .then(function(response) {
-            window.vehicleNum = response.result.response.result;
-          });
-      }
-    }, 500);
+    google.script.run
+      .withSuccessHandler(function(response) {
+        window.vehicleNum = response;
+      })
+      .getVehicleNum(sessionStorage.getItem("id"));
   }
 }

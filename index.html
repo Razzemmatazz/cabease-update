@@ -17,7 +17,7 @@
     <header class="header fixed-top">
       <h2 class="title">Cab-Ease</h2>
     </header>
-    <main class='container-fluid'>
+    <main class='container-fluid d-flex flex-column justify-content-between'>
       <div class='row'>
         <div class='col-md-4 mx-auto py-2'>
           <form id='verify' class='needs-validation' novalidate>
@@ -45,15 +45,24 @@
           </form>
         </div>
       </div>
+      <div class='row d-flex flex-row justify-content-around'>
+        <a href='./privacy.html'>Privacy Policy</a>
+        <a href='./tos.html'>Terms of Service</a>
+      </div>
     </main>
     <div class='d-none position-absolute gapi-verification'>
-      <h2>This app requires authorization to Google services before use. Please click the button below to authorize Google services.</h2>
-      <button type='button' class='btn btn-secondary' onclick='handleAuthClick()'>Authorize Google</button>
+      <div class='gapi-verification-div'>
+        <h4>This app requires authorization to Google services before use.</h4>
+        <h4>See our <a href='./privacy.html'>Privacy Policy</a> for more information on what data we use from your Google account</h4>
+        <a href='#' onclick='handleAuthClick()'>
+          <img class='gapi-verification-image' src='./images/btn_google_signin_light_normal_web@2x.png' />
+        </a>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src='./js/gapi8172018.js'></script>
+    <script src='./js/gapi2252019.js'></script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
     <script src='./js/login-scripts8172018.js'></script>
   </body>
