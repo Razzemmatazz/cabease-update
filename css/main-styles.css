@@ -1,3 +1,55 @@
+@media screen and (min-resolution: 200dpi) {
+  .form-group > * {
+    width: 100%;
+  }
+  .form-group label {
+    font-size: 5.2vw;
+  }
+  .form-group input {
+    font-size: 3.8vw;
+  }
+  .form-group textarea {
+    width: 100%;
+    font-size: 4vw;
+  }
+  .btn-group,
+  .btn-group-vertical {
+    width: 100%;
+  }
+  .btn-group .btn,
+  .submit-button {
+    width: 100%;
+    font-size: 5vw;
+  }
+  #currentForm {
+    margin-top: 10%;
+  }
+}
+@media screen and (max-resolution: 199dpi) {
+  .form-group label {
+    font-size: 4vw;
+  }
+  .form-group input {
+    font-size: 3vw;
+  }
+  .form-group textarea {
+    width: 100%;
+    font-size: 3vw;
+  }
+  .form-group .btn-group,
+  .form-group .btn-group-vertical {
+    width: 75%;
+  }
+  .form-group .btn-group {
+    display: flex;
+    align-self: center;
+    margin: auto;
+  }
+  .btn-group .btn {
+    font-size: 2.5vw;
+    flex: 1 !important;
+  }
+}
 body {
   height: 100%;
 }

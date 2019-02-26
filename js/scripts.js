@@ -518,7 +518,9 @@ function buttonCheck(element) {
             );
           paidGroup.append(paidCar, paidOffice);
           paidButtons.append(paidInput, paidGroup);
-          if (window.mediaMatch("(min-resolution: 200dpi)").matches) {
+          if (
+            window.mediaMatch("screen and (min-resolution: 200dpi)").matches
+          ) {
             stateGroup.addClass("btn-group-vertical");
             paidGroup.addClass("btn-group-vertical");
           }
@@ -802,7 +804,7 @@ function closeNotification() {
 }
 
 function screenSize() {
-  if (window.mediaMatch("(min-resolution: 200dpi)").matches) {
+  if (window.mediaMatch("screen and (min-resolution: 200dpi)").matches) {
     $("#menuButtons").removeClass("btn-group");
     $("#menuButtons").addClass("btn-group-vertical");
     toggleMenu("true");
