@@ -69,7 +69,7 @@ body {
     margin-top: 10%;
   }
 }
-@media screen and (min-width: 321px) and (max-width: 768px) {
+@media screen and (min-width: 321px) and (max-width: 1000px) {
   .form-group > * {
     width: 100%;
   }
@@ -98,7 +98,7 @@ body {
     margin-top: 10%;
   }
 }
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 1001px) {
   .form-group label {
     font-size: 4vw;
   }

@@ -1,6 +1,15 @@
-@media screen and (max-width: 320px) {
-  .gapi-verification h2 {
-    font-size: 1.5em;
+@media screen and (max-width: 1000px) {
+  .form-group label,
+  .form-group input,
+  .form-group div,
+  .form-row button {
+    font-size: 3em;
+  }
+  .form-row button {
+    margin-top: 50px;
+  }
+  .container-fluid {
+    padding-top: 50px;
   }
 }
 
@@ -20,34 +29,6 @@ header {
 main {
   margin-top: 12vh;
 }
-.gapi-verification {
-  top: 12vh;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 10000;
-  background: #333;
-  color: white;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-}
-.gapi-verification-div {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  margin: 0px auto;
-  width: 65%;
-}
-.gapi-verification-div > a {
-  text-align: center;
-  margin-top: 40px;
-}
-.gapi-verification-image {
-  width: 75%;
-  margin: auto;
-}
 .title {
   font-family: "Chewy", cursive;
   position: fixed;
@@ -57,9 +38,6 @@ main {
   margin: 0;
   top: 0;
   left: 0;
-}
-.walled {
-  display: none;
 }
 main {
   margin-top: 12vh;
