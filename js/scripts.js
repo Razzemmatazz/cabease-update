@@ -805,7 +805,6 @@ function closeNotification() {
 
 function screenSize() {
   if (window.matchMedia("screen and (min-resolution: 200dpi)").matches) {
-    $("#menuButtons").removeClass("btn-group");
     $("#menuButtons").addClass("btn-group-vertical");
     toggleMenu("true");
   }

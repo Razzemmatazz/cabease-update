@@ -17,6 +17,7 @@
     width: 100%;
   }
   .btn-group .btn,
+  .btn-group-vertical .btn,
   .submit-button {
     width: 100%;
     font-size: 5vw !important;
@@ -55,6 +56,9 @@
 }
 body {
   height: 100%;
+}
+#menuButtons {
+  border: 1px solid #222;
 }
 /* Pop-up, amount confirmation */
 .ui-widget-content {
