@@ -5,7 +5,8 @@ $(document).ready(function() {
   if (email) {
     $("main").removeClass("d-none");
   } else {
-    var loginUrl = "./index.html";
+    var loginUrl =
+      "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec";
     var note = $(document.createElement("h1"))
       .html(
         'You are not an authorized user for Cab-Ease. Please return to the <a href="' +
