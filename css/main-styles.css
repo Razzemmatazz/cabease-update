@@ -19,7 +19,10 @@
   .btn-group .btn,
   .submit-button {
     width: 100%;
-    font-size: 5vw;
+    font-size: 5vw !important;
+  }
+  .submit-button {
+    margin-top: 50px;
   }
   #currentForm {
     margin-top: 10%;
