@@ -28,6 +28,13 @@
   #currentForm {
     margin-top: 10%;
   }
+  h2 {
+    font-size: 5.2vw;
+  }
+  .btn-lg {
+    font-size: 5vw !important;
+    width: 75%;
+  }
 }
 @media screen and (max-resolution: 199dpi) {
   .form-group label {
