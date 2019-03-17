@@ -750,7 +750,11 @@ function editSave(button, tableRow) {
       output.push(item.innerHTML);
     });
     output.shift();
-    google.script.run.sheetUpdate(sessionStorage.getItem("id"));
+    google.script.run.sheetUpdate(
+      sessionStorage.getItem("id"),
+      output,
+      row.childNodes[1].innerHTML
+    );
   }
 }
 
