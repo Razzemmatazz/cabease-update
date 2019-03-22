@@ -1,33 +1,39 @@
 var scriptId = "1C_BiKPvlMv0IhMxmedlE4GWHz_lLFGWX6MLafwx9KlOwbK87h4koXYQp";
 $(document).ready(function() {
   gapiLoaded = false;
-  var email = sessionStorage.getItem("email");
-  if (email) {
-    $("main").removeClass("d-none");
-  } else {
-    var loginUrl =
-      "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec";
-    var note = $(document.createElement("h1"))
-      .html(
-        'You are not an authorized user for Cab-Ease. Please return to the <a href="' +
-          loginUrl +
-          '">login page</a> and log in from there.'
-      )
-      .css("margin-top", "12vh");
-    $("body").append(note);
-  }
-  var clockStatus = sessionStorage.getItem("clocked");
-  createMenu(clockStatus);
-  if (clockStatus == "true") {
-    $("#newFare")
-      .parent()
-      .click();
-  } else {
-    $("#logon")
-      .parent()
-      .click();
-  }
-  checkSessionForVehicle();
+  google.script.run
+    .withSuccessHandler(function(response) {
+      window.id = response.id;
+      window.email = response.email;
+      window.clockStatus = response.clocked;
+      window.vehicleNum = response.vehicleNum;
+      if (email) {
+        $("main").removeClass("d-none");
+      } else {
+        var loginUrl =
+          "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec";
+        var note = $(document.createElement("h1"))
+          .html(
+            'You are not an authorized user for Cab-Ease. Please return to the <a href="' +
+              loginUrl +
+              '">login page</a> and log in from there.'
+          )
+          .css("margin-top", "12vh");
+        $("body").append(note);
+      }
+      createMenu(clockStatus);
+      if (clockStatus == "true") {
+        $("#newFare")
+          .parent()
+          .click();
+      } else {
+        $("#logon")
+          .parent()
+          .click();
+      }
+      checkSessionForVehicle();
+    })
+    .getProperties(["id", "email", "clocked", "vehicleNum"]);
   screenSize();
 });
 
@@ -106,7 +112,7 @@ function openTab(element) {
       google.script.run
         .withSuccessHandler(editFare)
         .withFailureHandler(noFare)
-        .getPastFares(sessionStorage.getItem("id"));
+        .getPastFares(window.id);
       toggleMenu("true");
     } else if (name == "Log On" || name == "Log Off") {
       $("#editTable").html("");
@@ -248,7 +254,7 @@ function addForm(formName) {
 
 function submit(formName) {
   var obj = {
-    userId: sessionStorage.getItem("id"),
+    userId: window.id,
     menuType: "",
     tip: "",
     confirmationNum: "",
@@ -317,8 +323,8 @@ function submit(formName) {
           .checkMileage(
             $("#vehicleNum").val(),
             obj.mileage,
-            sessionStorage.getItem("id"),
-            sessionStorage.getItem("email")
+            window.id,
+            window.email
           );
       }
       break;
@@ -343,7 +349,7 @@ function submit(formName) {
       formName: formName,
       log: obj.log
     })
-    .sheetUpdate(sessionStorage.getItem("id"), output);
+    .sheetUpdate(window.id, output);
 }
 
 function submitted(response, obj) {
@@ -399,16 +405,14 @@ function submitted(response, obj) {
     parentDiv.append(title, button);
     $("#currentForm").html(parentDiv);
   } else if (formName == "logOnForm") {
-    sessionStorage.setItem("clocked", "true");
+    google.script.run.setProperties({ clocked: "true" });
     if (logStatus == "Log On") {
       createMenu("true");
       $("#newFare")
         .parent()
         .click();
     } else if (logStatus == "Log Off") {
-      sessionStorage.setItem("email", "");
-      sessionStorage.setItem("id", "");
-      sessionStorage.setItem("clocked", "false");
+      google.script.run.setProperties({ email: "", id: "", clocked: "true" });
       window.open(
         "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec",
         "_top"
@@ -751,7 +755,7 @@ function editSave(button, tableRow) {
     });
     output.shift();
     google.script.run.sheetUpdate(
-      sessionStorage.getItem("id"),
+      window.id,
       output,
       row.childNodes[1].innerHTML
     );
@@ -911,15 +915,12 @@ function verifyAmt(element) {
 }
 
 function checkSessionForVehicle() {
-  var hasVehicleNum = sessionStorage.getItem("vehicleNum");
-  if (hasVehicleNum) {
-    window.vehicleNum = sessionStorage.getItem("vehicleNum");
-  } else {
+  if (!window.vehicleNum) {
     var date = new Date().getTime();
     google.script.run
       .withSuccessHandler(function(response) {
         window.vehicleNum = response;
       })
-      .getVehicleNum(sessionStorage.getItem("id"));
+      .getVehicleNum(window.id);
   }
 }

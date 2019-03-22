@@ -1,13 +1,17 @@
 var scriptId = "1C_BiKPvlMv0IhMxmedlE4GWHz_lLFGWX6MLafwx9KlOwbK87h4koXYQp";
 
 $(document).ready(function() {
-  var email = sessionStorage.getItem("email");
-  if (email) {
-    window.open(
-      "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main",
-      "_top"
-    );
-  }
+  google.script.run
+    .withSuccessHandler(function(response) {
+      window.email = response.email;
+      if (email) {
+        window.open(
+          "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main",
+          "_top"
+        );
+      }
+    })
+    .getProperties(["email"]);
 });
 
 function validateForm(form) {
@@ -30,9 +34,11 @@ function validateLogin() {
   google.script.run
     .withSuccessHandler(function(response) {
       if (response.status) {
-        sessionStorage.setItem("clocked", "false");
-        sessionStorage.setItem("email", response.user.email);
-        sessionStorage.setItem("id", response.user.id);
+        google.script.run.setProperties({
+          clocked: "false",
+          email: response.user.email,
+          id: response.user.id
+        });
         window.open(
           "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main",
           "_top"
@@ -93,9 +99,11 @@ function addNewUser() {
     .withSuccessHandler(function(response) {
       var responseObj = response.result.response.result;
       if (responseObj.status) {
-        sessionStorage.setItem("clocked", "false");
-        sessionStorage.setItem("email", email);
-        sessionStorage.setItem("id", responseObj.id);
+        google.script.run.setProperties({
+          clocked: "false",
+          email: email,
+          id: responseObj.id
+        });
         window.open(
           "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main",
           "_top"
