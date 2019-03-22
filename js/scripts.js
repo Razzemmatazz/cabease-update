@@ -413,7 +413,12 @@ function submitted(response, obj) {
         .parent()
         .click();
     } else if (logStatus == "Log Off") {
-      google.script.run.setProperties({ email: "", id: "", clocked: "true" });
+      google.script.run.setProperties({
+        vehicleNum: "",
+        email: "",
+        id: "",
+        clocked: "true"
+      });
       window.open(
         "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec",
         "_top"
