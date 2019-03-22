@@ -3,6 +3,7 @@ $(document).ready(function() {
   gapiLoaded = false;
   google.script.run
     .withSuccessHandler(function(response) {
+      console.log(response);
       window.id = response.id;
       window.email = response.email;
       window.clockStatus = response.clocked;
