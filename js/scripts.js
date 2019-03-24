@@ -406,8 +406,11 @@ function submitted(response, obj) {
     parentDiv.append(title, button);
     $("#currentForm").html(parentDiv);
   } else if (formName == "logOnForm") {
-    google.script.run.setProperties({ clocked: "true" });
     if (logStatus == "Log On") {
+      google.script.run.setProperties({
+        vehicleNum: $("#vehicleNum").val(),
+        clocked: "true"
+      });
       createMenu("true");
       $("#newFare")
         .parent()
