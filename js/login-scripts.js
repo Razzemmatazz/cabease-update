@@ -3,6 +3,7 @@ var scriptId = "1C_BiKPvlMv0IhMxmedlE4GWHz_lLFGWX6MLafwx9KlOwbK87h4koXYQp";
 $(document).ready(function() {
   google.script.run
     .withSuccessHandler(function(response) {
+      console.log(response);
       if (response.effectiveUser === response.email) {
         window.open(
           "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main",
