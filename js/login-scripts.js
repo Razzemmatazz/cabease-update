@@ -4,7 +4,11 @@ $(document).ready(function() {
   google.script.run
     .withSuccessHandler(function(response) {
       window.email = response.email;
-      if (email) {
+      console.log({
+        email: email,
+        effectiveUser: Session.getEffectiveUser().getEmail()
+      });
+      if (email && Session.getEffectiveUser().getEmail() === email) {
         window.open(
           "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main",
           "_top"
