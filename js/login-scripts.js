@@ -3,12 +3,7 @@ var scriptId = "1C_BiKPvlMv0IhMxmedlE4GWHz_lLFGWX6MLafwx9KlOwbK87h4koXYQp";
 $(document).ready(function() {
   google.script.run
     .withSuccessHandler(function(response) {
-      window.email = response.email;
-      console.log({
-        email: email,
-        effectiveUser: Session.getEffectiveUser().getEmail()
-      });
-      if (email && Session.getEffectiveUser().getEmail() === email) {
+      if (response.effectiveUser === response.email) {
         window.open(
           "https://script.google.com/macros/s/AKfycbwjHOMUKbTMvKWL6R28hjlfwsKLtXOJkCcCKx8K7jX3A7KoCNq9/exec?page=main",
           "_top"
@@ -56,7 +51,6 @@ function validateLogin() {
 
 function verifyEmail(element) {
   var email = $(element).val();
-  console.log(email);
   google.script.run
     .withSuccessHandler(function(response) {
       var status = response.userStatus;
