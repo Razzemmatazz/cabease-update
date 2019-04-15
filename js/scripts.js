@@ -813,6 +813,9 @@ function updateNotification(update) {
     case "default":
       break;
   }
+  $("#notification")
+    .removeClass("d-none")
+    .addClass("d-flex");
 }
 
 function closeNotification() {
