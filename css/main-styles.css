@@ -41,6 +41,8 @@
   }
   .form-group input {
     font-size: 3vw;
+    width: 75%;
+    margin-left: 12.5%;
   }
   .form-group textarea {
     width: 100%;

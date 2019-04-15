@@ -23,7 +23,7 @@ $(document).ready(function() {
         $("body").append(note);
       }
       createMenu(clockStatus);
-      if (clockStatus == "true") {
+      if (clockStatus == "true" && id && email && vehicleNum) {
         $("#newFare")
           .parent()
           .click();
